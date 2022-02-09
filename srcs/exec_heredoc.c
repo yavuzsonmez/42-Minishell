@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_heredoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agunczer <agunczer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:37:28 by agunczer          #+#    #+#             */
-/*   Updated: 2022/02/03 16:06:51 by ysonmez          ###   ########.fr       */
+/*   Updated: 2022/02/09 11:34:52 by agunczer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static int	heredoc_free(t_words **words)
 {
 	t_words	*tmp;
 
+	tmp = NULL;
 	if (words == NULL)
 		return (1);
 	tmp = *words;
@@ -93,6 +94,7 @@ static t_words	*heredoc_input(char *delimiter, int x)
 	t_words	*tmp;
 	t_words	*words;
 
+	str = NULL;
 	words = NULL;
 	tmp = NULL;
 	while (1)
