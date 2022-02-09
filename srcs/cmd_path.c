@@ -6,7 +6,7 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 12:10:11 by ysonmez           #+#    #+#             */
-/*   Updated: 2022/02/03 14:28:50 by ysonmez          ###   ########.fr       */
+/*   Updated: 2022/02/09 10:57:38 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ static void	get_bin_path(t_list *node, char *env, int i)
 	char	**tmp;
 	char	*path;
 
+	path = NULL;
 	buff = ft_strjoin("/", node->cmd[0]);
 	tmp = ft_split(env, ':');
 	while (tmp[i] != NULL)
