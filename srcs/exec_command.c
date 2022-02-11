@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agunczer <agunczer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 15:41:59 by agunczer          #+#    #+#             */
-/*   Updated: 2022/02/09 11:33:25 by agunczer         ###   ########.fr       */
+/*   Updated: 2022/02/11 09:53:18 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	init_declarations(t_list *lst, char ***arr, int *size, int *i)
 		*arr = ft_calloc(*size + 1, sizeof(char *));
 	if (*arr == NULL)
 		exit(1);
-		(*arr)[*size] = NULL;
+	(*arr)[*size] = NULL;
 }
 
 static void	clean_up_if_fail(char **arr, t_fd *fd, int size)
