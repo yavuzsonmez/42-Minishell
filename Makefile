@@ -6,7 +6,7 @@
 #    By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/08 14:20:37 by ysonmez           #+#    #+#              #
-#    Updated: 2022/02/03 15:42:54 by ysonmez          ###   ########.fr        #
+#    Updated: 2022/02/11 15:25:45 by ysonmez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,7 @@ else #42
 	CPPFLAGS="-I/Users/$(USER)/.brew/opt/readline/include"
 endif
 
-CFLAGS			=		-Wall -Werror -Wextra
+CFLAGS			=		-Wall -Werror -Wextra -fsanitize=address
 
 .c.o			:
 						@gcc $(CFLAGS) -c $< -o $(<:.c=.o)

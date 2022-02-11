@@ -6,7 +6,7 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 11:37:39 by ysonmez           #+#    #+#             */
-/*   Updated: 2022/02/08 11:24:58 by ysonmez          ###   ########.fr       */
+/*   Updated: 2022/02/11 15:55:55 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,14 @@ static void	fill_cmd(t_list *node, char **arr, int i)
 	int	j;
 
 	j = 0;
+	if (node->prefix == HEREDOC || node->prefix == FILE_IN)
+		i--;
 	while (j < i)
 	{
 		if (node->prefix == STDIN)
 			node->cmd[j] = ft_strdup(arr[j]);
+		else if (node->prefix == HEREDOC || node->prefix == FILE_IN)
+			node->cmd[j] = ft_strdup(arr[j + 2]);
 		else if (arr[j + 1] != NULL && is_opt(arr[j + 1]) == 0)
 			node->cmd[j] = ft_strdup(arr[j + 1]);
 		else
@@ -51,13 +55,13 @@ static void	alloc_cmd(t_list *node, char **arr, int i)
 	}
 	if (arr[i + 1] == NULL)
 		i++;
-	if (node->prefix == FILE_IN || node->prefix == HEREDOC)
+	if (node->prefix == HEREDOC || node->prefix == FILE_IN)
 	{
-		node->cmd = (char **)malloc(sizeof(char *));
-		node->cmd[0] = NULL;
-		return ;
+		i--;
+		node->cmd = (char **)malloc(sizeof(char *) * i);
 	}
-	node->cmd = (char **)malloc(sizeof(char *) * (i + 1));
+	else
+		node->cmd = (char **)malloc(sizeof(char *) * (i + 1));
 	fill_cmd(node, arr, i);
 }
 

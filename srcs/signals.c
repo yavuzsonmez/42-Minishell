@@ -6,7 +6,7 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 16:18:26 by ysonmez           #+#    #+#             */
-/*   Updated: 2022/02/03 16:03:32 by ysonmez          ###   ########.fr       */
+/*   Updated: 2022/02/11 15:17:53 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ void	blocking_sighandler(void)
 {
 	if (WTERMSIG(g_exit_status) == SIGINT)
 	{
-		exit_positive(130, NULL);
 		ft_putstr_fd("^C\n", 2);
+		exit_positive(130, NULL);
 	}
 	else if (WTERMSIG(g_exit_status) == SIGQUIT)
 	{
-		exit_positive(131, NULL);
 		ft_putstr_fd("^\\Quit: 3\n", 2);
+		exit_positive(131, NULL);
 	}
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agunczer <agunczer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 16:51:38 by home              #+#    #+#             */
-/*   Updated: 2022/02/08 13:03:18 by agunczer         ###   ########.fr       */
+/*   Updated: 2022/02/11 15:18:28 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	fill_data(t_list *node, char **arr, int i)
 {
 	if (node->prefix == -1 && node->suffix == -1)
 		get_fix(node, arr, i);
-	if (node->cmd == NULL && node->prefix != HEREDOC && node->prefix != FILE_IN)
+	if (node->cmd == NULL)
 		get_cmd(node, arr, i);
 	if (node->cmd != NULL)
 		is_builtin(node);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agunczer <agunczer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:29:48 by ysonmez           #+#    #+#             */
-/*   Updated: 2022/02/08 13:02:42 by agunczer         ###   ########.fr       */
+/*   Updated: 2022/02/11 15:56:48 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,5 +261,8 @@ char			*replace(char *str, char *src, char *dst);
 void			lst_clear_words(t_words **lst);
 int				lst_clear_env(t_env **env);
 int				lst_clear_data(t_list **lst, t_list *tmp, t_list *to_free);
+
+void print_arr(char **arr); /*TO REMOVE*/
+void print_data(t_list	*lst); /*TO REMOVE*/
 
 #endif
