@@ -6,7 +6,7 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 16:51:38 by home              #+#    #+#             */
-/*   Updated: 2022/02/11 15:18:28 by ysonmez          ###   ########.fr       */
+/*   Updated: 2022/02/11 16:12:10 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ static void	fill_data(t_list *node, char **arr, int i)
 		get_cmd(node, arr, i);
 	if (node->cmd != NULL)
 		is_builtin(node);
-	if (node->cmd != NULL && node->builtin == false && node->bin_path == NULL)
+	if ((node->cmd != NULL && node->cmd[0] != NULL)
+		&& node->builtin == false && node->bin_path == NULL)
 		get_path(node);
 	if (node->prefix == FILE_IN
 		|| node->suffix == FILE_OUT || node->suffix == FILE_APPEND)

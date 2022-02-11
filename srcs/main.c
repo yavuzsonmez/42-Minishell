@@ -6,7 +6,7 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:23:11 by ysonmez           #+#    #+#             */
-/*   Updated: 2022/02/11 15:56:09 by ysonmez          ###   ########.fr       */
+/*   Updated: 2022/02/11 15:59:17 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ static void	minishell(int stin, int stout, t_env *env)
 			data = ft_lstnew();
 			init_data(data, cmd, env);
 		}
-		//print_data(data);
-		pipex(data);
+		print_data(data);
+		//pipex(data);
 		if (ft_strcmp(cmd, "") != 0)
 			add_history(cmd);
 		lst_clear_data(&data, NULL, NULL);

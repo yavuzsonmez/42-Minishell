@@ -6,7 +6,7 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 11:37:39 by ysonmez           #+#    #+#             */
-/*   Updated: 2022/02/11 15:55:55 by ysonmez          ###   ########.fr       */
+/*   Updated: 2022/02/11 16:10:10 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static void	alloc_cmd(t_list *node, char **arr, int i)
 void	get_cmd(t_list *node, char **arr, int i)
 {
 	alloc_cmd(node, arr, i);
-	if (node->cmd == NULL)
+	if (node->cmd == NULL || node->cmd[0] == NULL)
 		return ;
 	trim_quotes_cmd(node);
 }
