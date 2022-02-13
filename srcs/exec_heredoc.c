@@ -88,15 +88,23 @@ static int	heredoc_create_lst(t_words **tmp,
 	return (0);
 }
 
-static t_words	*heredoc_input(char *delimiter, int x)
+static t_words	*heredoc_input(char *delimiter, int x, t_fd *fd, t_list *lst)
 {
 	char	*str;
 	t_words	*tmp;
 	t_words	*words;
+	int stout;
+	int stin;
+	int fdt[2];
+	int temp_fd;
 
 	str = NULL;
 	words = NULL;
 	tmp = NULL;
+	pipe(fdt);
+	stout = dup(1);
+	stin = dup(0);
+	dup2(fdt[1], 1);
 	while (1)
 	{
 		str = readline("heredoc>");
@@ -104,10 +112,18 @@ static t_words	*heredoc_input(char *delimiter, int x)
 			return (NULL);
 		if (heredoc_create_lst(&tmp, &words, str, &x) == 1)
 			return (NULL);
-		if (str == NULL || (ft_strncmp(str, delimiter, ft_strlen(str))
+		if (str == NULL || (ft_strncmp(str, "eof", ft_strlen(str))
 				== 0 && str[0] != '\0'))
 			break ;
+		ft_putendl_fd(str, fdt[1]);
 	}
+	fd->temp_fd = fdt[0];
+	close(fdt[1]);
+	dup2(stout, 1);
+	dup2(fdt[0], 0);
+	execve(lst->bin_path, lst->cmd, NULL);
+	close(fdt[0]);
+	close(fd->temp_fd);
 	return (words);
 }
 
@@ -128,9 +144,10 @@ void	heredoc(char *delimiter, t_list *lst, t_fd *fd)
 	signal(SIGQUIT, SIG_IGN);
 	x = 1;
 	words = NULL;
-	words = heredoc_input(delimiter, x);
+	words = heredoc_input(delimiter, x, fd, lst);
+		exit(0);
 	if (words == NULL)
 		exit(0);
-	heredoc_output(words, lst, fd, delimiter);
-	heredoc_free(&words);
+	// heredoc_output(words, lst, fd, delimiter);
+	// heredoc_free(&words);
 }

@@ -73,8 +73,8 @@ static void	minishell(int stin, int stout, t_env *env)
 			data = ft_lstnew();
 			init_data(data, cmd, env);
 		}
-		print_data(data);
-		//pipex(data);
+		// print_data(data);
+		pipex(data);
 		if (ft_strcmp(cmd, "") != 0)
 			add_history(cmd);
 		lst_clear_data(&data, NULL, NULL);

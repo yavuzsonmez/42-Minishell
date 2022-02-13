@@ -55,15 +55,15 @@ OBJS			=		$(SRCS:.c=.o)
 
 LIB				=		@make -C ./libft
 
-ifeq ($(USER), home)
+# ifeq ($(USER), home)
 	LDFLAGS="-L/usr/local/opt/readline/lib"
 	CPPFLAGS="-I/usr/local/opt/readline/include"
-else #42
-	LDFLAGS="-L/Users/$(USER)/.brew/opt/readline/lib"
-	CPPFLAGS="-I/Users/$(USER)/.brew/opt/readline/include"
-endif
+# else #42
+# 	LDFLAGS="-L/Users/$(USER)/.brew/opt/readline/lib"
+# 	CPPFLAGS="-I/Users/$(USER)/.brew/opt/readline/include"
+# endif
 
-CFLAGS			=		-Wall -Werror -Wextra -fsanitize=address
+CFLAGS			=		-fsanitize=address
 
 .c.o			:
 						@gcc $(CFLAGS) -c $< -o $(<:.c=.o)

@@ -104,11 +104,11 @@ void	pipex(t_list *lst)
 	cmd_cnt = cmd_count(tmp);
 	if (lst->prefix == -1 && lst->suffix == -1 && exit_zero())
 		return ;
-	if (check_fails(tmp) == 1)
-	{
-		close_pipes(&fd);
-		return ;
-	}
+	// if (check_fails(tmp) == 1)
+	// {
+	// 	close_pipes(&fd);
+	// 	return ;
+	// }
 	tasker(tmp, &fd, cmd_cnt);
 	close_pipes(&fd);
 }
