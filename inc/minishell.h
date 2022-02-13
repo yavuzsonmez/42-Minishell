@@ -245,7 +245,7 @@ int				ft_lstsize(t_env *env);
 void			command(t_list *lst, t_fd *fd);
 
 /*	exec_heredoc.c */
-void			heredoc(char *delimiter, t_list *lst, t_fd *fd);
+void			heredoc(t_list *lst, t_fd *fd);
 
 /*	env_get.c */
 int				env_to_value_lst(t_words *words, t_list *lst);

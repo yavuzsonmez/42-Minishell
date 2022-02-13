@@ -63,7 +63,7 @@ void	execute_task(t_list *lst, t_fd *fd)
 	if (lst->prefix == FILE_IN)
 		read_into();
 	else if (lst->prefix == HEREDOC)
-		heredoc(lst->hd_delimiter, lst, fd);
+		heredoc(lst, fd);
 	else if (lst->builtin == 1)
 		builtin(lst);
 	else
