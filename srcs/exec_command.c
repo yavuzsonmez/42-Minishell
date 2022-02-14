@@ -6,7 +6,7 @@
 /*   By: agunczer <agunczer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 15:41:59 by agunczer          #+#    #+#             */
-/*   Updated: 2022/02/14 11:39:05 by agunczer         ###   ########.fr       */
+/*   Updated: 2022/02/14 12:39:31 by agunczer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	command(t_list *lst, t_fd *fd)
 	int		size;
 	int		i;
 
-	if (lst->builtin == 0 && lst->bin_path == NULL
+	if (lst->prefix != HEREDOC && lst->builtin == 0 && lst->bin_path == NULL
 		&& ft_putstr_fd(CMD_MISSING_MSG, 2))
 	{
 		close(fd->pipes[1]);
