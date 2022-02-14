@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agunczer <agunczer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 17:44:25 by ysonmez           #+#    #+#             */
-/*   Updated: 2022/02/08 11:21:15 by ysonmez          ###   ########.fr       */
+/*   Updated: 2022/02/14 12:11:52 by agunczer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,7 @@ void	heredoc_delimiter(t_list *node, char **arr)
 {
 	if (arr != NULL)
 	{
-		if ((arr[1] != NULL && is_opt(arr[1]) == 0)
-			&& (arr[2] == NULL || is_opt(arr[2])))
+		if ((arr[1] != NULL && is_opt(arr[1]) == 0))
 		{
 			node->hd_delimiter = ft_strdup(arr[1]);
 			if (node->hd_delimiter == NULL && exit_positive(2, MALLOC_FAIL))

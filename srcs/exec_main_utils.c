@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agunczer <agunczer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:18:36 by agunczer          #+#    #+#             */
-/*   Updated: 2022/02/03 15:18:11 by ysonmez          ###   ########.fr       */
+/*   Updated: 2022/02/14 12:00:41 by agunczer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_wait(int cmd_cnt)
 {
 	while (cmd_cnt-- > 0)
 	{
-		waitpid(0, &g_exit_status, 0);
+		waitpid(-1, &g_exit_status, 0);
 		if (WIFSIGNALED(g_exit_status))
 			blocking_sighandler();
 		if (WIFEXITED(g_exit_status))

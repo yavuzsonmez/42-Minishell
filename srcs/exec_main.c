@@ -6,7 +6,7 @@
 /*   By: agunczer <agunczer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 16:44:28 by home              #+#    #+#             */
-/*   Updated: 2022/02/09 11:36:54 by agunczer         ###   ########.fr       */
+/*   Updated: 2022/02/14 12:02:12 by agunczer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,11 @@ static void	child(t_list *lst, t_fd *fd)
 
 /* Parent Process */
 
-static void	parent(t_fd *fd)
+static void	parent(t_fd *fd, t_list *lst, pid_t pid)
 {
 	close(fd->pipes[1]);
+	if (lst->prefix == HEREDOC)
+		waitpid(pid, &g_exit_status, 0);
 	close(fd->temp_fd);
 	fd->temp_fd = dup(fd->pipes[0]);
 	close(fd->pipes[0]);
@@ -83,7 +85,7 @@ static int	tasker(t_list *tmp, t_fd *fd, int cmd_cnt)
 			else if (pid == 0)
 				child(tmp, fd);
 			else
-				parent(fd);
+				parent(fd, tmp, pid);
 		}
 		else if (tmp->builtin == 1)
 			forkless_processing(tmp, fd);
@@ -104,11 +106,11 @@ void	pipex(t_list *lst)
 	cmd_cnt = cmd_count(tmp);
 	if (lst->prefix == -1 && lst->suffix == -1 && exit_zero())
 		return ;
-	// if (check_fails(tmp) == 1)
-	// {
-	// 	close_pipes(&fd);
-	// 	return ;
-	// }
+	if (check_fails(tmp) == 1)
+	{
+		close_pipes(&fd);
+		return ;
+	}
 	tasker(tmp, &fd, cmd_cnt);
 	close_pipes(&fd);
 }
