@@ -6,7 +6,7 @@
 /*   By: agunczer <agunczer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:37:28 by agunczer          #+#    #+#             */
-/*   Updated: 2022/02/14 13:06:36 by agunczer         ###   ########.fr       */
+/*   Updated: 2022/02/14 16:40:25 by agunczer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,9 @@ static int	heredoc_free(t_words **words)
 *	stored in a list into the output FD
 */
 
-static void	heredoc_output(t_list *lst,
-			t_fd *fd, int fdt[2])
+static void	heredoc_output(t_list *lst, t_fd *fd, int fdt[2])
 {
-	int stout;
+	int	stout;
 
 	stout = dup(1);
 	close(fd->temp_fd);
@@ -88,17 +87,13 @@ static int	heredoc_create_lst(t_words **tmp,
 	return (0);
 }
 
-static t_words	*heredoc_input(int x, t_list *lst, int fdt[2])
+static t_words	*heredoc_input(int x, t_list *lst, int fdt[2], char *str)
 {
-	char	*str;
 	t_words	*tmp;
 	t_words	*words;
-	int stout;
 
-	str = NULL;
 	words = NULL;
 	tmp = NULL;
-	stout = dup(1);
 	while (1)
 	{
 		str = readline("heredoc>");
@@ -113,15 +108,10 @@ static t_words	*heredoc_input(int x, t_list *lst, int fdt[2])
 	if (env_to_value_lst(words, lst) == 1 && exit_positive(2, MALLOC_FAIL))
 		exit(1);
 	tmp = words;
-	while (tmp && is_same(tmp->word, lst->hd_delimiter) != 1)
-	{
-		ft_putendl_fd(tmp->word, fdt[1]);
-		// free(tmp->word);
+	while (tmp && is_same(tmp->word, lst->hd_delimiter) != 1
+		&& ft_putendl_fd(tmp->word, fdt[1]))
 		tmp = tmp->next;
-	}
-	// free(tmp->word);
 	close(fdt[1]);
-	dup2(stout, 1);
 	return (words);
 }
 
@@ -135,17 +125,20 @@ static t_words	*heredoc_input(int x, t_list *lst, int fdt[2])
 
 void	heredoc(t_list *lst, t_fd *fd)
 {
-	int		x;
 	t_words	*words;
-	int fdt[2];
+	int		x;
+	int		fdt[2];
+	int		stout;
 
 	signal(SIGINT, &sig_hd);
 	signal(SIGQUIT, SIG_IGN);
+	stout = dup(1);
 	x = 1;
 	words = NULL;
 	pipe(fdt);
 	close(fd->temp_fd);
-	words = heredoc_input(x, lst, fdt);
+	words = heredoc_input(x, lst, fdt, NULL);
+	dup2(stout, 1);
 	if (words == NULL)
 		exit(0);
 	heredoc_output(lst, fd, fdt);

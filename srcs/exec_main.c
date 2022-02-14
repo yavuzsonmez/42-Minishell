@@ -6,7 +6,7 @@
 /*   By: agunczer <agunczer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 16:44:28 by home              #+#    #+#             */
-/*   Updated: 2022/02/14 12:02:12 by agunczer         ###   ########.fr       */
+/*   Updated: 2022/02/14 15:18:03 by agunczer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,10 @@ void	pipex(t_list *lst)
 	t_list	*tmp;
 
 	tmp = lst;
-	fd.temp_fd = dup(0);
-	cmd_cnt = cmd_count(tmp);
 	if (lst->prefix == -1 && lst->suffix == -1 && exit_zero())
 		return ;
+	fd.temp_fd = dup(0);
+	cmd_cnt = cmd_count(tmp);
 	if (check_fails(tmp) == 1)
 	{
 		close_pipes(&fd);

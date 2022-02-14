@@ -6,7 +6,7 @@
 /*   By: agunczer <agunczer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 16:45:00 by home              #+#    #+#             */
-/*   Updated: 2022/02/08 12:47:12 by agunczer         ###   ########.fr       */
+/*   Updated: 2022/02/14 15:56:25 by agunczer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,11 @@ int	cst_free(char *str, t_dollar *lst, int mode)
 	else if (mode == 1)
 	{
 		lst->tmp = lst->var;
+		while (lst->tmp)
+		{
+			free(lst->tmp->string);
+			lst->tmp = lst->tmp->next;
+		}
 		if (lst->var != NULL)
 			free(lst->var);
 	}

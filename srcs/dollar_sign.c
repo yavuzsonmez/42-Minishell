@@ -6,7 +6,7 @@
 /*   By: agunczer <agunczer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 16:43:33 by home              #+#    #+#             */
-/*   Updated: 2022/02/03 13:59:24 by agunczer         ###   ########.fr       */
+/*   Updated: 2022/02/14 15:45:13 by agunczer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static t_store_env	*var_new(char *str, t_list *lst)
 	}
 	new_struct->var_len = ft_strlen(new_struct->string);
 	new_struct->next = NULL;
+	free(tmp);
 	return (new_struct);
 }
 

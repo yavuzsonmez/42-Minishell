@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agunczer <agunczer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 16:51:38 by home              #+#    #+#             */
-/*   Updated: 2022/02/11 16:12:10 by ysonmez          ###   ########.fr       */
+/*   Updated: 2022/02/14 16:34:20 by agunczer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,14 +124,14 @@ t_list	*parser(char *cmd, t_env *env, int i, t_list *list)
 
 	set_var(q, NULL, NULL);
 	arr = space_fix(ft_split(cmd, ' '), 0, 0, 0);
-	while (arr[i] != NULL)
+	while (arr[i] != NULL && set_var(q, NULL, arr[i]))
 	{
-		set_var(q, NULL, arr[i]);
 		if (((i > 0 && is_opt(arr[i])) || arr[i + 1] == NULL)
 			&& q[0] % 2 == 0 && q[1] % 2 == 0)
 		{
 			node = ft_lstnew();
-			if (node == NULL && lst_clear_data(&list, NULL, NULL))
+			if (node == NULL && lst_clear_data(&list, NULL, NULL)
+				&& ft_memfreeall((void **)arr))
 				return (NULL);
 			init_data(node, cmd, env);
 			fill_data(node, arr, i);
