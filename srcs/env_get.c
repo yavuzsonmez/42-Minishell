@@ -6,7 +6,7 @@
 /*   By: agunczer <agunczer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 16:44:02 by home              #+#    #+#             */
-/*   Updated: 2022/02/14 15:42:10 by agunczer         ###   ########.fr       */
+/*   Updated: 2022/02/14 17:10:28 by agunczer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	env_to_value_lst(t_words *words, t_list *lst)
 		tmp = words->word;
 		words->word = replace(words->word, tmp2, "$?");
 		free(tmp);
-		free(tmp2);
 		if (words->word == NULL && exit_positive(2, MALLOC_FAIL))
 			return (1);
 		tmp = words->word;
@@ -38,6 +37,7 @@ int	env_to_value_lst(t_words *words, t_list *lst)
 			return (1);
 		words = words->next;
 	}
+	free(tmp2);
 	return (0);
 }
 
