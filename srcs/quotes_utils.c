@@ -6,7 +6,7 @@
 /*   By: agunczer <agunczer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 15:26:09 by ysonmez           #+#    #+#             */
-/*   Updated: 2022/02/08 15:00:23 by agunczer         ###   ########.fr       */
+/*   Updated: 2022/02/14 14:43:18 by agunczer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ char	*copy_trimmed_str(t_list *node, unsigned char q)
 		new = ft_split(&node->readline[*node->read_index + 3], q);
 	else
 		new = ft_split(&node->readline[*node->read_index], q);
-	if (new[i] == NULL)
+	if (new[i] == NULL && ft_memfreeall((void **)new))
 		return (ft_strdup("\0"));
 	buf = ft_strdup(new[i]);
 	i++;

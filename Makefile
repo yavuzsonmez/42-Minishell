@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+         #
+#    By: agunczer <agunczer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/08 14:20:37 by ysonmez           #+#    #+#              #
-#    Updated: 2022/02/11 15:25:45 by ysonmez          ###   ########.fr        #
+#    Updated: 2022/02/14 14:51:25 by agunczer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,7 @@ else #42
 	CPPFLAGS="-I/Users/$(USER)/.brew/opt/readline/include"
 endif
 
-CFLAGS			=		-Wall -Wextra -Werror -fsanitize=address
+CFLAGS			=		-Wall -Werror -Wextra #-g -fsanitize=address
 
 .c.o			:
 						@gcc $(CFLAGS) -c $< -o $(<:.c=.o)
@@ -87,6 +87,9 @@ fclean			:		clean
 						@echo "$(Red)Minishell has been removed$(Set_Color)"
 						@cd ./libft && make fclean
 						@echo "$(Red)Libft has been removed$(Set_Color)"
+
+valgrind		:		
+						docker run -ti -v $(PWD):/test memory-test:0.1 bash -c "cd /test/; make; valgrind --leak-check=full ./minishell"
 
 all				:		$(NAME)
 

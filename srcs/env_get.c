@@ -6,7 +6,7 @@
 /*   By: agunczer <agunczer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 16:44:02 by home              #+#    #+#             */
-/*   Updated: 2022/02/08 12:58:26 by agunczer         ###   ########.fr       */
+/*   Updated: 2022/02/14 14:45:41 by agunczer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,18 @@
 int	env_to_value_lst(t_words *words, t_list *lst)
 {
 	char	*tmp;
+	char	*tmp2;
 
 	tmp = NULL;
+	tmp2 = ft_itoa(g_exit_status);
+	if (tmp2 == NULL && exit_positive(2, MALLOC_FAIL))
+		return (1);
 	while (words)
 	{
 		tmp = words->word;
-		words->word = replace(words->word, ft_itoa(g_exit_status), "$?");
+		words->word = replace(words->word, tmp2, "$?");
 		free(tmp);
+		free(tmp2);
 		if (words->word == NULL && exit_positive(2, MALLOC_FAIL))
 			return (1);
 		tmp = words->word;
@@ -39,13 +44,18 @@ int	env_to_value_lst(t_words *words, t_list *lst)
 static int	norminator(char **words, int i, t_list *lst)
 {
 	char	*tmp;
+	char	*tmp2;
 
 	tmp = words[i];
+	tmp2 = ft_itoa(g_exit_status);
+	if (tmp2 == NULL && exit_positive(2, MALLOC_FAIL))
+		return (1);
 	if (lst->quote_cmd != '\'')
 	{
-		words[i] = replace(words[i], ft_itoa(g_exit_status), "$?");
+		words[i] = replace(words[i], tmp2, "$?");
 		free(tmp);
 	}
+	free(tmp2);
 	if (words[i] == NULL && exit_positive(2, MALLOC_FAIL))
 		return (1);
 	tmp = words[i];
