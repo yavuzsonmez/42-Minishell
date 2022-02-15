@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agunczer <agunczer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 15:41:59 by agunczer          #+#    #+#             */
-/*   Updated: 2022/02/14 16:20:30 by agunczer         ###   ########.fr       */
+/*   Updated: 2022/02/15 10:52:36 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,9 @@ void	command(t_list *lst, t_fd *fd)
 	int		size;
 	int		i;
 
+	if (lst->cmd[0] == NULL && lst->prefix == PIPE_IN
+		&& lst->suffix == STDOUT)
+		exit(0);
 	if (lst->prefix != HEREDOC && lst->prefix != FILE_IN
 		&& lst->builtin == 0 && lst->bin_path == NULL
 		&& ft_putstr_fd(CMD_MISSING_MSG, 2))
